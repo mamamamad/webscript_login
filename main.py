@@ -19,7 +19,8 @@ class Login:
             driver.find_element('id',"password").send_keys(self.password)
             driver.find_element("css selector", ".loginButton").click()
             print("login")
-            time.sleep(1)
+            exit()
+            
         except:
             print("connected.")
             exit()
