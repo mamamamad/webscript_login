@@ -76,8 +76,10 @@ class Login:
     def read_file(self):
         # this file is used for read file.
         
-        file = open('Up.txt','r')
+        
+        
         try:
+            file = open('Up.txt','r')
             if file == None:
                 self.get_passuser()
                 self.save_file()
