@@ -12,15 +12,19 @@ class Login:
 
     def log_in(self):
         # login with selenium 
-        driver = webdriver.Chrome()
-        driver.get('https://internet.birjand.ac.ir/login')
-        driver.find_element('id',"username").send_keys(self.username)
-        driver.find_element('id',"password").send_keys(self.password)
-        driver.find_element("css selector", ".loginButton").click()
-        print("login")
-        time.sleep(1)
+        try:
+            driver = webdriver.Chrome()
+            driver.get('https://internet.birjand.ac.ir/login')
+            driver.find_element('id',"username").send_keys(self.username)
+            driver.find_element('id',"password").send_keys(self.password)
+            driver.find_element("css selector", ".loginButton").click()
+            print("login")
+            time.sleep(1)
+        except:
+            print("connected.")
+            exit()
 
-        driver.quit()
+        
         exit()
     def get_passuser(self):
         # This function is used to receive the username and password. 
@@ -39,11 +43,17 @@ class Login:
         
     def save_file(self):
         # This function is for saving information in the file.
-        file = open('Up.txt','w') 
+        
+        
+        file = open('d:/up.txt','w') 
         file.write(self.password)
         file.write('\n')
         file.write(self.username)   
         file.close()
+        
+        
+        
+        
     def check_network(self):
         # This function is for checking the internet status.
         t = self.time/5
@@ -63,12 +73,11 @@ class Login:
                 if t == 0:
                     qu = input("The desired Wi-Fi network was not found. Are you still waiting? Y/N")
                     if qu.lower() == 'n':
-                        pass
+                        exit()
                     elif qu.lower() == 'y':
                         t = self.time/5
                 else:
-                    pass
-        
+                    continue
         if tag == 0:
             exit()
         else:
@@ -76,21 +85,22 @@ class Login:
     def read_file(self):
         # this file is used for read file.
         
-        
-        
         try:
-            file = open('Up.txt','r')
+            file = open('d:/up.txt','r')
             if file == None:
                 self.get_passuser()
                 self.save_file()
+                self.main()
             else:    
                 self.password,self.username  = file.readlines()   
                 self.password = self.password.replace('\n','')
         except:
             self.get_passuser()
             self.save_file()
+            self.main()
             
     def main(self):
+        
         self.check_network()
         self.read_file()
         self.log_in()    
