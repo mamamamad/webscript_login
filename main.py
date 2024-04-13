@@ -2,6 +2,7 @@ from selenium import webdriver
 import time
 import os
 import re
+import sys
 
 class Login:
     """ This class is for managing the entire login and logout process """
@@ -19,11 +20,12 @@ class Login:
             driver.find_element('id',"password").send_keys(self.password)
             driver.find_element("css selector", ".loginButton").click()
             print("login")
-            exit()
+            
+            sys.exit()
             
         except:
             print("connected.")
-            exit()
+            sys.exit()
 
         
         exit()
@@ -46,7 +48,7 @@ class Login:
         # This function is for saving information in the file.
         
         
-        file = open('d:/up.txt','w') 
+        file = open('C:/Users/Public/Documents/up.txt','w') 
         file.write(self.password)
         file.write('\n')
         file.write(self.username)   
@@ -74,20 +76,21 @@ class Login:
                 if t == 0:
                     qu = input("The desired Wi-Fi network was not found. Are you still waiting? Y/N")
                     if qu.lower() == 'n':
-                        exit()
+                        sys.exit()
                     elif qu.lower() == 'y':
                         t = self.time/5
                 else:
                     continue
         if tag == 0:
-            exit()
+            
+            sys.exit()
         else:
             pass
     def read_file(self):
         # this file is used for read file.
         
         try:
-            file = open('d:/up.txt','r')
+            file = open('C:/Users/Public/Documents/up.txt','r')
             if file == None:
                 self.get_passuser()
                 self.save_file()
@@ -107,8 +110,9 @@ class Login:
         self.log_in()    
             
 
-l= Login()
-l.main()
+if __name__ == "__main__":
+    l= Login()
+    l.main()
 
 
 
