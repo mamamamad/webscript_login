@@ -1,7 +1,6 @@
 from selenium import webdriver
 import time
-import os
-import re
+
 import sys
 
 class Login:
